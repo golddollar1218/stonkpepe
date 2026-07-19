@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Sora:wght@400;500;600;700;800&family=Cinzel:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,21 +22,22 @@
           extend: {
             colors: {
               stonk: {
-                navy: "#071428",
-                deep: "#0A1F45",
-                royal: "#123A7A",
-                forest: "#1B4D2E",
-                moss: "#2E7A45",
-                pepe: "#5BAE37",
-                amber: "#FF9800",
-                gold: "#F5C542",
-                mist: "#EAF2FF",
+                navy: "#081526",
+                deep: "#0C223D",
+                royal: "#163A66",
+                forest: "#1F4A2C",
+                moss: "#2F6B3C",
+                pepe: "#4FBF3A",
+                amber: "#F4A31A",
+                gold: "#E8C56A",
+                mist: "#EEF3F8",
+                mute: "#8FA6BF",
               },
             },
             fontFamily: {
-              display: ["Archivo Black", "sans-serif"],
-              body: ["Sora", "sans-serif"],
-              ribbon: ["Cinzel", "serif"],
+              display: ["Barlow Condensed", "sans-serif"],
+              body: ["Outfit", "sans-serif"],
+              ribbon: ["Outfit", "sans-serif"],
             },
           },
         },
@@ -44,12 +45,15 @@
     </script>
     <style>
       :root {
-        --navy: #071428;
-        --deep: #0a1f45;
-        --pepe: #5bae37;
-        --amber: #ff9800;
-        --gold: #f5c542;
-        --mist: #eaf2ff;
+        --navy: #081526;
+        --deep: #0c223d;
+        --surface: #102a48;
+        --pepe: #4fbf3a;
+        --amber: #f4a31a;
+        --gold: #e8c56a;
+        --mist: #eef3f8;
+        --mute: #8fa6bf;
+        --line: rgba(79, 191, 58, 0.18);
         --mx: 50%;
         --my: 50%;
       }
@@ -71,9 +75,23 @@
         pointer-events: none;
         z-index: 0;
         background:
-          radial-gradient(ellipse 70% 45% at 80% 0%, #ff980022, transparent 55%),
-          radial-gradient(ellipse 50% 40% at 10% 90%, #5bae3718, transparent 50%),
-          linear-gradient(180deg, #071428 0%, #0a1f45 45%, #071428 100%);
+          radial-gradient(ellipse 55% 40% at 85% 8%, rgba(244, 163, 26, 0.12), transparent 55%),
+          radial-gradient(ellipse 45% 35% at 8% 88%, rgba(79, 191, 58, 0.1), transparent 50%),
+          linear-gradient(180deg, #081526 0%, #0c223d 48%, #081526 100%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.22;
+        background-image:
+          linear-gradient(rgba(143, 166, 191, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(143, 166, 191, 0.07) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 20%, transparent 75%);
       }
 
       body > * {
@@ -81,25 +99,24 @@
         z-index: 1;
       }
 
-      /* Floating ticker particles */
       .ticker-field {
         position: fixed;
         inset: 0;
         pointer-events: none;
         z-index: 0;
         overflow: hidden;
-        opacity: 0.35;
+        opacity: 0.22;
       }
 
       .ticker-tri {
         position: absolute;
         width: 0;
         height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 9px solid #5bae37;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 7px solid var(--pepe);
         animation: float-tri linear infinite;
-        filter: drop-shadow(0 0 6px #5bae37aa);
+        filter: drop-shadow(0 0 4px rgba(79, 191, 58, 0.45));
       }
 
       .hero {
@@ -119,27 +136,31 @@
         height: 100%;
         object-fit: cover;
         object-position: center center;
-        transform: scale(1.02) translate3d(calc((50% - var(--mx)) * 0.02), calc((50% - var(--my)) * 0.015), 0);
-        transition: transform 0.15s ease-out;
+        transform: scale(1.03) translate3d(
+          calc((50% - var(--mx)) * 0.018),
+          calc((50% - var(--my)) * 0.012),
+          0
+        );
+        transition: transform 0.18s ease-out;
         will-change: transform;
-        animation: hero-breathe 14s ease-in-out infinite alternate;
+        animation: hero-breathe 16s ease-in-out infinite alternate;
       }
 
       .hero-veil {
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(180deg, #07142866 0%, #07142822 28%, #07142888 70%, #071428f2 100%),
-          linear-gradient(90deg, #071428aa 0%, #07142833 42%, #07142855 100%);
+          linear-gradient(180deg, rgba(8, 21, 38, 0.55) 0%, rgba(8, 21, 38, 0.15) 30%, rgba(8, 21, 38, 0.72) 68%, #081526 100%),
+          linear-gradient(90deg, rgba(8, 21, 38, 0.78) 0%, rgba(8, 21, 38, 0.2) 48%, rgba(8, 21, 38, 0.45) 100%);
       }
 
       .hero-glow {
         position: absolute;
         inset: auto 0 0 0;
-        height: 45%;
-        background: radial-gradient(ellipse at 55% 80%, #ff980033, transparent 60%);
+        height: 42%;
+        background: radial-gradient(ellipse at 55% 85%, rgba(244, 163, 26, 0.22), transparent 62%);
         pointer-events: none;
-        animation: amber-pulse 4.5s ease-in-out infinite;
+        animation: amber-pulse 5s ease-in-out infinite;
       }
 
       .hero-content {
@@ -149,121 +170,113 @@
       }
 
       .brand-hero {
-        font-family: "Archivo Black", sans-serif;
-        letter-spacing: 0.02em;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        color: #fff;
         text-shadow:
-          0 0 24px #5bae3766,
-          0 4px 0 #0a2a18,
-          0 0 60px #ff980033;
-        background: linear-gradient(180deg, #ffffff 20%, #c8f5a0 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+          0 2px 0 rgba(8, 21, 38, 0.55),
+          0 0 28px rgba(79, 191, 58, 0.25);
       }
 
       .ribbon {
         display: inline-block;
-        background: linear-gradient(180deg, #1b4d2e, #123822);
-        border: 1px solid #f5c54288;
-        box-shadow: 0 0 24px #ff980022, inset 0 1px 0 #5bae3744;
-        color: #f5c542;
-        font-family: "Cinzel", serif;
-        letter-spacing: 0.14em;
+        background: linear-gradient(180deg, #245533, #173824);
+        border: 1px solid rgba(232, 197, 106, 0.55);
+        color: var(--gold);
+        font-family: "Outfit", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.16em;
       }
 
       .btn-amber {
-        background: linear-gradient(180deg, #ffb347, #ff9800 55%, #e65100);
-        color: #071428;
-        box-shadow: 0 0 0 0 #ff980044, 0 8px 28px #ff980033;
+        background: linear-gradient(180deg, #ffb84a, #f4a31a 58%, #d8860c);
+        color: #081526;
+        box-shadow: 0 8px 24px rgba(244, 163, 26, 0.28);
         transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
       }
 
       .btn-amber:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 14px 40px #ff980055;
-        filter: brightness(1.08);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(244, 163, 26, 0.4);
+        filter: brightness(1.05);
       }
 
       .btn-ghost {
-        border: 1px solid #5bae3755;
-        background: #07142888;
-        backdrop-filter: blur(10px);
+        border: 1px solid rgba(143, 166, 191, 0.35);
+        background: rgba(8, 21, 38, 0.55);
+        backdrop-filter: blur(12px);
         transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
       }
 
       .btn-ghost:hover {
-        border-color: #5bae37;
-        background: #5bae3718;
+        border-color: rgba(79, 191, 58, 0.7);
+        background: rgba(79, 191, 58, 0.1);
         transform: translateY(-3px);
       }
 
       .marquee-track {
-        animation: marquee 26s linear infinite;
+        animation: marquee 28s linear infinite;
       }
 
       .section-label {
-        color: var(--amber);
-        letter-spacing: 0.28em;
+        color: var(--pepe);
+        letter-spacing: 0.26em;
         font-size: 0.72rem;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
       }
 
       .amber-rule {
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--amber), transparent);
+        background: linear-gradient(90deg, transparent, var(--pepe), var(--amber), transparent);
       }
 
       .meme-tile {
         position: relative;
         overflow: hidden;
-        border: 1px solid #5bae3728;
-        background: #0a1f45aa;
+        border: 1px solid var(--line);
+        background: rgba(16, 42, 72, 0.65);
+        border-radius: 1rem;
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease,
           box-shadow 0.35s ease;
         transform-style: preserve-3d;
       }
 
       .meme-tile:hover {
-        transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
-        border-color: #ff980088;
-        box-shadow: 0 24px 60px #00000077, 0 0 40px #ff980022;
+        transform: translateY(-8px);
+        border-color: rgba(244, 163, 26, 0.45);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
       }
 
       .meme-tile img {
-        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
       .meme-tile:hover img {
-        transform: scale(1.08);
-        filter: saturate(1.15) brightness(1.05);
+        transform: scale(1.06);
       }
 
       .meme-shine {
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          115deg,
-          transparent 35%,
-          #ffffff22 48%,
-          transparent 62%
-        );
+        background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.12) 50%, transparent 62%);
         transform: translateX(-120%);
         pointer-events: none;
       }
 
       .meme-tile:hover .meme-shine {
-        animation: shine-sweep 0.9s ease forwards;
+        animation: shine-sweep 0.85s ease forwards;
       }
 
       .stat-panel {
-        border: 1px solid #5bae3728;
-        background: linear-gradient(160deg, #0a1f45ee, #071428ee);
+        border: 1px solid var(--line);
+        background: linear-gradient(165deg, rgba(16, 42, 72, 0.95), rgba(8, 21, 38, 0.92));
         transition: border-color 0.3s ease, transform 0.3s ease;
       }
 
       .stat-panel:hover {
-        border-color: #ff980066;
+        border-color: rgba(244, 163, 26, 0.4);
         transform: translateY(-4px);
       }
 
@@ -271,11 +284,11 @@
         width: min(100%, 240px);
         aspect-ratio: 1;
         border-radius: 50%;
-        background: conic-gradient(var(--amber) 0deg 360deg);
+        background: conic-gradient(var(--pepe) 0deg 220deg, var(--amber) 220deg 360deg);
         display: grid;
         place-items: center;
-        box-shadow: 0 0 50px #ff980033, 0 0 0 1px #ff980055;
-        animation: ring-spin 12s linear infinite;
+        box-shadow: 0 0 36px rgba(79, 191, 58, 0.2);
+        animation: ring-spin 14s linear infinite;
       }
 
       .tok-ring-inner {
@@ -283,29 +296,29 @@
         height: 72%;
         border-radius: 50%;
         background: var(--navy);
-        border: 1px solid #5bae3744;
+        border: 1px solid rgba(79, 191, 58, 0.28);
         display: grid;
         place-content: center;
         text-align: center;
-        animation: ring-spin 12s linear infinite reverse;
+        animation: ring-spin 14s linear infinite reverse;
       }
 
       .buy-step {
-        border: 1px solid #5bae3722;
-        background: linear-gradient(180deg, #123a7a33, #071428cc);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(16, 42, 72, 0.7), rgba(8, 21, 38, 0.88));
         transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .buy-step:hover {
-        border-color: #ff980066;
+        border-color: rgba(79, 191, 58, 0.45);
         transform: translateY(-5px);
-        box-shadow: 0 16px 40px #00000055;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
       }
 
       .reveal {
         opacity: 0;
-        transform: translateY(32px);
-        transition: opacity 0.85s ease, transform 0.85s ease;
+        transform: translateY(28px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
 
       .reveal.visible {
@@ -314,18 +327,13 @@
       }
 
       .logo-glow {
-        animation: logo-glow 3.2s ease-in-out infinite;
+        animation: logo-glow 3.5s ease-in-out infinite;
       }
 
       .float-slow {
         animation: float-slow 5.5s ease-in-out infinite;
       }
 
-      .pulse-dot {
-        animation: pulse-dot 1.8s ease-in-out infinite;
-      }
-
-      /* Custom cursor + trail */
       #aim-cursor {
         position: fixed;
         left: 0;
@@ -333,16 +341,16 @@
         z-index: 9999;
         display: none;
         pointer-events: none;
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
         transform: translate(-50%, -50%);
-        filter: drop-shadow(0 0 8px #ff9800aa);
+        filter: drop-shadow(0 0 6px rgba(244, 163, 26, 0.7));
         transition: width 0.12s ease, height 0.12s ease;
       }
 
       #aim-cursor.is-hovering {
-        width: 46px;
-        height: 46px;
+        width: 42px;
+        height: 42px;
       }
 
       #aim-cursor.is-press {
@@ -352,25 +360,25 @@
       .cursor-trail {
         position: fixed;
         z-index: 9997;
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         pointer-events: none;
-        background: radial-gradient(circle, #ff9800, #5bae3700);
+        background: radial-gradient(circle, rgba(244, 163, 26, 0.85), rgba(79, 191, 58, 0));
         mix-blend-mode: screen;
-        animation: trail-fade 0.55s ease-out forwards;
+        animation: trail-fade 0.5s ease-out forwards;
       }
 
       .arrow-stamp {
         position: fixed;
         z-index: 9998;
         pointer-events: none;
-        width: 56px;
-        height: 56px;
+        width: 52px;
+        height: 52px;
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.3) rotate(var(--rot, -28deg));
-        filter: drop-shadow(0 0 10px #ff9800aa);
-        animation: arrow-stamp-in 1.3s ease-out forwards;
+        filter: drop-shadow(0 0 8px rgba(244, 163, 26, 0.65));
+        animation: arrow-stamp-in 1.25s ease-out forwards;
       }
 
       .arrow-stamp svg {
@@ -382,15 +390,15 @@
         position: fixed;
         z-index: 9998;
         pointer-events: none;
-        width: 64px;
-        height: 64px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         overflow: hidden;
-        border: 2px solid #ff9800;
-        box-shadow: 0 0 18px #ff980066;
+        border: 2px solid var(--pepe);
+        box-shadow: 0 0 14px rgba(79, 191, 58, 0.4);
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.2);
-        animation: pepe-stamp-in 1.1s ease-out forwards;
+        animation: pepe-stamp-in 1.05s ease-out forwards;
       }
 
       .pepe-stamp img {
@@ -405,17 +413,17 @@
 
       @keyframes hero-breathe {
         from {
-          filter: brightness(1);
+          filter: brightness(1) saturate(1);
         }
         to {
-          filter: brightness(1.06) saturate(1.08);
+          filter: brightness(1.04) saturate(1.05);
         }
       }
 
       @keyframes amber-pulse {
         0%,
         100% {
-          opacity: 0.7;
+          opacity: 0.65;
         }
         50% {
           opacity: 1;
@@ -434,29 +442,17 @@
           transform: translateY(0);
         }
         50% {
-          transform: translateY(-12px);
+          transform: translateY(-10px);
         }
       }
 
       @keyframes logo-glow {
         0%,
         100% {
-          box-shadow: 0 0 0 0 #ff980033;
+          box-shadow: 0 0 0 0 rgba(79, 191, 58, 0.2);
         }
         50% {
-          box-shadow: 0 0 28px 4px #ff980055, 0 0 40px #5bae3722;
-        }
-      }
-
-      @keyframes pulse-dot {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.5;
-          transform: scale(0.85);
+          box-shadow: 0 0 22px 2px rgba(79, 191, 58, 0.35);
         }
       }
 
@@ -477,14 +473,14 @@
           transform: translateY(110vh) rotate(0deg);
           opacity: 0;
         }
-        10% {
-          opacity: 1;
+        12% {
+          opacity: 0.9;
         }
-        90% {
-          opacity: 0.8;
+        88% {
+          opacity: 0.7;
         }
         to {
-          transform: translateY(-10vh) rotate(180deg);
+          transform: translateY(-10vh) rotate(160deg);
           opacity: 0;
         }
       }
@@ -503,29 +499,29 @@
         }
         18% {
           opacity: 1;
-          transform: translate(-50%, -50%) scale(1.3) rotate(var(--rot, -28deg));
+          transform: translate(-50%, -50%) scale(1.25) rotate(var(--rot, -28deg));
         }
-        36% {
-          transform: translate(-50%, -50%) scale(0.92) rotate(var(--rot, -28deg));
+        40% {
+          transform: translate(-50%, -50%) scale(0.95) rotate(var(--rot, -28deg));
         }
-        50% {
+        55% {
           opacity: 1;
           transform: translate(-50%, -50%) scale(1) rotate(var(--rot, -28deg));
         }
         100% {
           opacity: 0;
-          transform: translate(-50%, -72%) scale(1.1) rotate(calc(var(--rot, -28deg) + 14deg));
+          transform: translate(-50%, -70%) scale(1.05) rotate(calc(var(--rot, -28deg) + 12deg));
         }
       }
 
       @keyframes pepe-stamp-in {
         0% {
           opacity: 0;
-          transform: translate(-50%, -50%) scale(0.15) rotate(-20deg);
+          transform: translate(-50%, -50%) scale(0.15) rotate(-16deg);
         }
-        25% {
+        28% {
           opacity: 1;
-          transform: translate(-50%, -50%) scale(1.15) rotate(8deg);
+          transform: translate(-50%, -50%) scale(1.1) rotate(6deg);
         }
         55% {
           opacity: 1;
@@ -533,7 +529,7 @@
         }
         100% {
           opacity: 0;
-          transform: translate(-50%, -80%) scale(0.7) rotate(12deg);
+          transform: translate(-50%, -78%) scale(0.7) rotate(10deg);
         }
       }
 
@@ -563,27 +559,27 @@
     <div class="ticker-field" id="ticker-field" aria-hidden="true"></div>
 
     <header
-      class="sticky top-0 z-50 border-b border-stonk-pepe/15 bg-stonk-navy/75 backdrop-blur-xl"
+      class="sticky top-0 z-50 border-b border-white/10 bg-stonk-navy/80 backdrop-blur-xl"
     >
       <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <a href="#top" class="flex items-center gap-3 magnetic" aria-label="Stonkpepe home">
           <span
-            class="logo-glow relative grid h-11 w-11 place-items-center overflow-hidden rounded-xl border border-stonk-amber/50 bg-stonk-deep"
+            class="logo-glow relative grid h-11 w-11 place-items-center overflow-hidden rounded-xl border border-stonk-pepe/40 bg-stonk-deep"
           >
             <img src="logo.png" alt="Stonkpepe logo" class="h-full w-full object-cover" />
           </span>
-          <span class="font-display text-xl tracking-wide text-stonk-mist sm:text-2xl"
+          <span class="font-display text-2xl font-extrabold tracking-[0.06em] text-stonk-mist sm:text-3xl"
             >STONKPEPE</span
           >
         </a>
         <div
-          class="hidden items-center gap-7 text-sm font-bold uppercase tracking-wider text-stonk-mist/70 lg:flex"
+          class="hidden items-center gap-7 text-sm font-semibold uppercase tracking-wider text-stonk-mute lg:flex"
         >
-          <a href="#about" class="transition hover:text-stonk-amber">About</a>
-          <a href="#memes" class="transition hover:text-stonk-amber">Memes</a>
-          <a href="#tokenomics" class="transition hover:text-stonk-amber">Tokenomics</a>
-          <a href="#how-to-buy" class="transition hover:text-stonk-amber">Buy</a>
-          <a href="#chart" class="transition hover:text-stonk-amber">Chart</a>
+          <a href="#about" class="transition hover:text-stonk-pepe">About</a>
+          <a href="#memes" class="transition hover:text-stonk-pepe">Memes</a>
+          <a href="#tokenomics" class="transition hover:text-stonk-pepe">Tokenomics</a>
+          <a href="#how-to-buy" class="transition hover:text-stonk-pepe">Buy</a>
+          <a href="#chart" class="transition hover:text-stonk-pepe">Chart</a>
         </div>
         <a
           href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=0xf09abd822ede9678dae82d5cefef0afa30c4d46a"
@@ -611,18 +607,18 @@
               <img
                 src="logo.png"
                 alt=""
-                class="float-slow h-16 w-16 rounded-2xl border border-stonk-amber/60 shadow-[0_0_36px_#ff980044] sm:h-20 sm:w-20"
+                class="float-slow h-16 w-16 rounded-2xl border border-stonk-pepe/50 shadow-[0_0_28px_rgba(79,191,58,0.28)] sm:h-20 sm:w-20"
                 aria-hidden="true"
               />
               <h1 class="brand-hero text-5xl leading-none sm:text-7xl lg:text-8xl">STONKPEPE</h1>
             </div>
 
-            <p class="ribbon rounded-sm px-5 py-2 text-[11px] font-bold uppercase sm:text-xs">
+            <p class="ribbon rounded px-5 py-2 text-[11px] uppercase sm:text-xs">
               We don't follow trends, we are the trend
             </p>
 
-            <p class="mt-6 max-w-xl text-base font-semibold leading-relaxed text-stonk-mist/80 sm:text-lg">
-              STONKPEPE means exactly what it sounds like: <span class="text-stonk-amber">STONK + PEPE</span>.
+            <p class="mt-6 max-w-xl text-base font-medium leading-relaxed text-stonk-mist/80 sm:text-lg">
+              STONKPEPE means exactly what it sounds like: <span class="text-stonk-amber font-semibold">STONK + PEPE</span>.
               Market meme energy made for the on-chain bull run.
             </p>
 
@@ -665,10 +661,10 @@
 
       <!-- Marquee -->
       <div
-        class="overflow-hidden border-y border-stonk-amber/30 bg-gradient-to-r from-stonk-amber via-stonk-gold to-stonk-amber py-3 text-stonk-navy"
+        class="overflow-hidden border-y border-stonk-pepe/25 bg-gradient-to-r from-stonk-forest via-stonk-moss to-stonk-forest py-3 text-stonk-mist"
       >
         <div
-          class="marquee-track flex w-max whitespace-nowrap font-display text-2xl tracking-wide sm:text-3xl"
+          class="marquee-track flex w-max whitespace-nowrap font-display text-2xl font-bold tracking-[0.08em] sm:text-3xl"
         >
           <span
             >STONKPEPE &nbsp;◆&nbsp; WE ARE THE TREND &nbsp;◆&nbsp; AIM HIGH &nbsp;◆&nbsp; GREEN
@@ -689,7 +685,7 @@
           <div class="reveal order-2 lg:order-1">
             <div class="relative mx-auto max-w-md lg:max-w-none">
               <div
-                class="overflow-hidden rounded-3xl border border-stonk-amber/35 shadow-[0_0_70px_#ff980022]"
+                class="overflow-hidden rounded-3xl border border-stonk-pepe/30 shadow-[0_0_50px_rgba(79,191,58,0.12)]"
               >
                 <img
                   src="memes/meme-bullish.png"
@@ -698,7 +694,7 @@
                 />
               </div>
               <div
-                class="absolute -bottom-6 -right-4 w-[42%] overflow-hidden rounded-2xl border border-stonk-pepe/50 shadow-xl rotate-6 sm:-right-8"
+                class="absolute -bottom-6 -right-4 w-[42%] overflow-hidden rounded-2xl border border-stonk-pepe/40 shadow-xl rotate-6 sm:-right-8"
               >
                 <img
                   src="memes/meme-moon.png"
@@ -707,7 +703,7 @@
                 />
               </div>
               <div
-                class="absolute -left-3 -top-5 w-[36%] overflow-hidden rounded-2xl border border-stonk-amber/50 shadow-xl -rotate-12 sm:-left-6"
+                class="absolute -left-3 -top-5 w-[36%] overflow-hidden rounded-2xl border border-stonk-gold/40 shadow-xl -rotate-12 sm:-left-6"
               >
                 <img
                   src="memes/meme-aim.png"
@@ -720,18 +716,18 @@
 
           <div class="reveal order-1 lg:order-2">
             <p class="section-label">The Meaning</p>
-            <h2 class="mt-3 font-display text-5xl tracking-wide text-stonk-mist sm:text-6xl lg:text-7xl">
+            <h2 class="mt-3 font-display text-5xl font-extrabold tracking-wide text-stonk-mist sm:text-6xl lg:text-7xl">
               Stonk meets<br />
-              <span class="text-stonk-amber">Pepe.</span>
+              <span class="text-stonk-pepe">Pepe.</span>
             </h2>
             <div class="amber-rule my-6 w-24"></div>
-            <p class="text-lg font-semibold leading-relaxed text-stonk-mist/75">
+            <p class="text-lg font-medium leading-relaxed text-stonk-mute">
               <strong class="text-stonk-amber">STONK</strong> is the internet's battle cry for stocks,
               charts, gains, and bullish conviction. <strong class="text-stonk-pepe">PEPE</strong> is
               the iconic frog at the heart of meme culture.
             </p>
-            <p class="mt-4 text-lg font-semibold leading-relaxed text-stonk-mist/75">
-              Together they become <strong class="text-white">STONKPEPE</strong> — market energy,
+            <p class="mt-4 text-lg font-medium leading-relaxed text-stonk-mute">
+              Together they become <strong class="text-stonk-mist">STONKPEPE</strong> — market energy,
               timeless meme power, and one green frog aiming straight up.
             </p>
           </div>
@@ -746,10 +742,10 @@
         <div class="mx-auto max-w-7xl">
           <div class="reveal mx-auto max-w-2xl text-center">
             <p class="section-label">Meme Vault</p>
-            <h2 class="mt-3 font-display text-5xl tracking-wide sm:text-6xl lg:text-7xl">
-              Pure <span class="text-stonk-amber">visuals</span>
+            <h2 class="mt-3 font-display text-5xl font-extrabold tracking-wide sm:text-6xl lg:text-7xl">
+              Pure <span class="text-stonk-pepe">visuals</span>
             </h2>
-            <p class="mt-4 text-base font-semibold text-stonk-mist/65">
+            <p class="mt-4 text-base font-medium text-stonk-mute">
               No letters. Just Pepe, arrows, and bullish energy — ready to drop.
             </p>
           </div>
@@ -859,10 +855,10 @@
         <div class="mx-auto max-w-6xl">
           <div class="reveal text-center">
             <p class="section-label">Tokenomics</p>
-            <h2 class="mt-3 font-display text-5xl tracking-wide sm:text-6xl lg:text-7xl">
-              Fair launch <span class="text-stonk-amber">math</span>
+            <h2 class="mt-3 font-display text-5xl font-extrabold tracking-wide sm:text-6xl lg:text-7xl">
+              Fair launch <span class="text-stonk-pepe">math</span>
             </h2>
-            <p class="mx-auto mt-4 max-w-xl text-base font-semibold text-stonk-mist/65">
+            <p class="mx-auto mt-4 max-w-xl text-base font-medium text-stonk-mute">
               Clean supply. Zero tax. Full liquidity. Arrow-straight.
             </p>
           </div>
@@ -897,13 +893,13 @@
           >
             <div class="tok-ring float-slow shrink-0">
               <div class="tok-ring-inner">
-                <p class="font-display text-5xl leading-none text-stonk-amber">100%</p>
-                <p class="mt-1 text-xs font-extrabold uppercase tracking-wider text-stonk-mist/60">
+                <p class="font-display text-5xl leading-none text-stonk-pepe">100%</p>
+                <p class="mt-1 text-xs font-extrabold uppercase tracking-wider text-stonk-mute">
                   Liquidity
                 </p>
               </div>
             </div>
-            <div class="w-full max-w-[260px] overflow-hidden rounded-2xl border border-stonk-amber/40">
+            <div class="w-full max-w-[260px] overflow-hidden rounded-2xl border border-stonk-pepe/30">
               <img
                 src="memes/meme-coins.png"
                 alt="Stonkpepe coins"
@@ -923,10 +919,10 @@
         <div class="mx-auto max-w-7xl">
           <div class="reveal text-center">
             <p class="section-label">How to Buy</p>
-            <h2 class="mt-3 font-display text-5xl tracking-wide sm:text-6xl lg:text-7xl">
-              Four steps to <span class="text-stonk-amber">$STONKPEPE</span>
+            <h2 class="mt-3 font-display text-5xl font-extrabold tracking-wide sm:text-6xl lg:text-7xl">
+              Four steps to <span class="text-stonk-pepe">$STONKPEPE</span>
             </h2>
-            <p class="mx-auto mt-4 max-w-xl text-base font-semibold text-stonk-mist/65">
+            <p class="mx-auto mt-4 max-w-xl text-base font-medium text-stonk-mute">
               Grab ETH on Robinhood Chain and lock the arrow.
             </p>
           </div>
@@ -1020,14 +1016,14 @@
       <section class="px-4 py-24 sm:px-6">
         <div class="reveal mx-auto max-w-4xl text-center">
           <p class="section-label">Contract</p>
-          <h2 class="mt-3 font-display text-5xl tracking-wide sm:text-6xl lg:text-7xl">
-            Official <span class="text-stonk-amber">CA</span>
+          <h2 class="mt-3 font-display text-5xl font-extrabold tracking-wide sm:text-6xl lg:text-7xl">
+            Official <span class="text-stonk-pepe">CA</span>
           </h2>
-          <p class="mt-4 text-base font-semibold text-stonk-mist/65">
+          <p class="mt-4 text-base font-medium text-stonk-mute">
             Always verify the contract before swapping.
           </p>
           <div
-            class="mx-auto mt-8 flex max-w-3xl items-center gap-3 rounded-2xl border border-stonk-amber/30 bg-stonk-deep/80 p-3 pl-5 backdrop-blur-md"
+            class="mx-auto mt-8 flex max-w-3xl items-center gap-3 rounded-2xl border border-stonk-pepe/25 bg-stonk-deep/80 p-3 pl-5 backdrop-blur-md"
           >
             <code
               id="contract-address"
@@ -1059,8 +1055,8 @@
           >
             <div>
               <p class="section-label">Live Feed</p>
-              <h2 class="mt-2 font-display text-5xl tracking-wide sm:text-6xl lg:text-7xl">
-                On-chain <span class="text-stonk-amber">chart</span>
+              <h2 class="mt-2 font-display text-5xl font-extrabold tracking-wide sm:text-6xl lg:text-7xl">
+                On-chain <span class="text-stonk-pepe">chart</span>
               </h2>
             </div>
             <a
@@ -1072,7 +1068,7 @@
             >
           </div>
           <div
-            class="reveal overflow-hidden rounded-2xl border border-stonk-amber/25 bg-[#060e1c] shadow-[0_0_60px_#ff980012]"
+            class="reveal overflow-hidden rounded-2xl border border-stonk-pepe/20 bg-[#060e1c] shadow-[0_0_48px_rgba(79,191,58,0.08)]"
           >
             <iframe
               title="Stonkpepe live DexScreener chart"
@@ -1094,14 +1090,14 @@
           <img
             src="logo.png"
             alt=""
-            class="h-12 w-12 rounded-xl border border-stonk-amber/40 object-cover"
+            class="h-12 w-12 rounded-xl border border-stonk-pepe/35 object-cover"
             aria-hidden="true"
           />
           <div>
-            <p class="font-display text-3xl tracking-wide text-stonk-amber sm:text-4xl">
+            <p class="font-display text-3xl font-extrabold tracking-wide text-stonk-mist sm:text-4xl">
               STONKPEPE
             </p>
-            <p class="font-ribbon text-xs font-bold uppercase tracking-[0.18em] text-stonk-mist/45">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-stonk-mute">
               We are the trend
             </p>
           </div>
@@ -1110,7 +1106,7 @@
           href="https://x.com/STONKPEPECOIN"
           target="_blank"
           rel="noopener noreferrer"
-          class="magnetic grid h-11 w-11 place-items-center overflow-hidden rounded-full border border-stonk-mist/25 bg-[#111] transition hover:border-stonk-amber"
+          class="magnetic grid h-11 w-11 place-items-center overflow-hidden rounded-full border border-stonk-mist/25 bg-[#111] transition hover:border-stonk-pepe"
           aria-label="X Community"
         >
           <img src="x.png" alt="X" class="h-full w-full object-cover" />
@@ -1123,19 +1119,19 @@
       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M10 44 L32 12 L40 28 L54 10"
-          stroke="#FF9800"
+          stroke="#F4A31A"
           stroke-width="5"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
         <path
           d="M44 10 H54 V20"
-          stroke="#FF9800"
+          stroke="#F4A31A"
           stroke-width="5"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
-        <circle cx="32" cy="40" r="3" fill="#5BAE37" />
+        <circle cx="32" cy="40" r="3" fill="#4FBF3A" />
       </svg>
     </div>
 
@@ -1146,7 +1142,7 @@
           <path d="M42 10 H56 V24" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
           <polygon points="12,56 18,42 24,56" fill="currentColor" opacity="0.85"/>
         </svg>`;
-      const ARROW_COLORS = ["#FF9800", "#F5C542", "#5BAE37", "#EAF2FF"];
+      const ARROW_COLORS = ["#F4A31A", "#E8C56A", "#4FBF3A", "#EEF3F8"];
       const PEPE_STAMPS = [
         "memes/meme-face.png",
         "memes/meme-aim.png",
@@ -1163,7 +1159,7 @@
       const tickerField = document.getElementById("ticker-field");
 
       /* Floating green triangles */
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 10; i++) {
         const tri = document.createElement("div");
         tri.className = "ticker-tri";
         tri.style.left = `${Math.random() * 100}%`;
